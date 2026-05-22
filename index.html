@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>More Apps by BenLim.dev</title>
+  <title>More Apps by blim.dev</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -272,9 +272,14 @@
       font-size: 0.88rem;
     }
 
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .footer a {
       color: inherit;
-      margin-left: 12px;
     }
 
     @media (max-width: 980px) {
@@ -306,57 +311,39 @@
   <main class="page">
     <section class="topbar">
       <div class="brand">
-        <div class="logo">&#129412;</div>
+        <div class="logo" id="site-logo"></div>
         <div>
-          <p class="eyebrow">More apps by</p>
-          <h1>BenLim.dev</h1>
-          <p class="subtitle">Tiny apps for big imaginations. Made with juice.</p>
+          <p class="eyebrow" id="site-eyebrow"></p>
+          <h1 id="site-name"></h1>
+          <p class="subtitle" id="site-tagline"></p>
         </div>
       </div>
 
-      <div class="stats">
-        <div class="stat">
-          <strong>10</strong>
-          <span>apps</span>
-        </div>
-        <div class="stat">
-          <strong>4</strong>
-          <span>years</span>
-        </div>
-        <div class="stat">
-          <strong>&infin;</strong>
-          <span>ideas</span>
-        </div>
-      </div>
+      <div class="stats" id="site-stats"></div>
     </section>
 
-    <nav class="filters" aria-label="Categories">
-      <span class="filter">All</span>
-      <span class="filter">Games</span>
-      <span class="filter">Learning</span>
-      <span class="filter active">Family</span>
-      <span class="filter">Creative</span>
-      <span class="filter">Tools</span>
-      <span class="filter">Home</span>
-      <span class="filter">Pets</span>
-    </nav>
+    <nav class="filters" id="site-filters" aria-label="Categories"></nav>
 
     <section class="grid" id="apps-grid">
       <div class="grid-status">Loading apps...</div>
     </section>
 
     <footer class="footer">
-      <div>&copy; BenLim.dev &middot; made with crayons &amp; code</div>
-      <div>
-        <a href="#">twitter</a>
-        <a href="#">github</a>
-        <a href="#">email</a>
-      </div>
+      <div id="footer-copy"></div>
+      <div class="footer-links" id="footer-links"></div>
     </footer>
   </main>
 
   <script>
+    const siteLogo = document.getElementById("site-logo");
+    const siteEyebrow = document.getElementById("site-eyebrow");
+    const siteName = document.getElementById("site-name");
+    const siteTagline = document.getElementById("site-tagline");
+    const siteStats = document.getElementById("site-stats");
+    const siteFilters = document.getElementById("site-filters");
     const appsGrid = document.getElementById("apps-grid");
+    const footerCopy = document.getElementById("footer-copy");
+    const footerLinks = document.getElementById("footer-links");
 
     function escapeHtml(value) {
       return String(value)
@@ -369,6 +356,46 @@
 
     function renderStatus(message) {
       appsGrid.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
+    }
+
+    function renderSite(site) {
+      document.title = `More Apps by ${site.name}`;
+      siteLogo.innerHTML = site.logo;
+      siteEyebrow.textContent = site.eyebrow;
+      siteName.textContent = site.name;
+      siteTagline.textContent = site.tagline;
+      footerCopy.innerHTML = site.footerCopy;
+
+      siteStats.innerHTML = "";
+      (site.stats || []).forEach((stat) => {
+        const statEl = document.createElement("div");
+        statEl.className = "stat";
+        statEl.innerHTML = `
+          <strong>${stat.value}</strong>
+          <span>${escapeHtml(stat.label)}</span>
+        `;
+        siteStats.appendChild(statEl);
+      });
+
+      siteFilters.innerHTML = "";
+      (site.filters || []).forEach((filter) => {
+        const filterEl = document.createElement("span");
+        filterEl.className = `filter${filter.active ? " active" : ""}`;
+        filterEl.textContent = filter.label;
+        siteFilters.appendChild(filterEl);
+      });
+
+      footerLinks.innerHTML = "";
+      (site.footerLinks || []).forEach((link) => {
+        const linkEl = document.createElement("a");
+        linkEl.href = link.href;
+        linkEl.textContent = link.label;
+        if (link.href.startsWith("http")) {
+          linkEl.target = "_blank";
+          linkEl.rel = "noreferrer";
+        }
+        footerLinks.appendChild(linkEl);
+      });
     }
 
     function renderApps(apps) {
@@ -407,24 +434,36 @@
       });
     }
 
-    async function loadApps() {
+    async function loadData() {
       try {
-        const response = await fetch("./apps.json");
+        const [siteResponse, appsResponse] = await Promise.all([
+          fetch("./site.json"),
+          fetch("./apps.json")
+        ]);
 
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+        if (!siteResponse.ok) {
+          throw new Error(`site.json HTTP ${siteResponse.status}`);
         }
 
-        const apps = await response.json();
+        if (!appsResponse.ok) {
+          throw new Error(`apps.json HTTP ${appsResponse.status}`);
+        }
+
+        const [site, apps] = await Promise.all([
+          siteResponse.json(),
+          appsResponse.json()
+        ]);
+
+        renderSite(site);
         renderApps(apps);
       } catch (error) {
         renderStatus(
-          "Could not load apps.json. If this page is opened directly from file://, use a small local web server so the JSON file can be loaded."
+          "Could not load site.json or apps.json. If this page is opened directly from file://, use a small local web server so the JSON files can be loaded."
         );
       }
     }
 
-    loadApps();
+    loadData();
   </script>
 </body>
 </html>
