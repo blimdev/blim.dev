@@ -141,6 +141,7 @@
       font-weight: 700;
       font-size: 0.94rem;
       line-height: 1;
+      cursor: pointer;
     }
 
     .filter.active {
@@ -344,6 +345,8 @@
     const appsGrid = document.getElementById("apps-grid");
     const footerCopy = document.getElementById("footer-copy");
     const footerLinks = document.getElementById("footer-links");
+    let allApps = [];
+    let activeFilter = "All";
 
     function escapeHtml(value) {
       return String(value)
@@ -356,6 +359,27 @@
 
     function renderStatus(message) {
       appsGrid.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
+    }
+
+    function getFilteredApps() {
+      if (activeFilter === "All") {
+        return allApps;
+      }
+
+      return allApps.filter((app) => (app.tags || []).includes(activeFilter));
+    }
+
+    function setActiveFilter(nextFilter) {
+      activeFilter = nextFilter;
+
+      siteFilters.querySelectorAll(".filter").forEach((filterEl) => {
+        filterEl.classList.toggle(
+          "active",
+          filterEl.dataset.filter === activeFilter
+        );
+      });
+
+      renderApps(getFilteredApps());
     }
 
     function renderSite(site) {
@@ -378,10 +402,26 @@
       });
 
       siteFilters.innerHTML = "";
+      const initialActiveFilter =
+        (site.filters || []).find((filter) => filter.active)?.label || "All";
+      activeFilter = initialActiveFilter;
+
       (site.filters || []).forEach((filter) => {
         const filterEl = document.createElement("span");
-        filterEl.className = `filter${filter.active ? " active" : ""}`;
+        filterEl.className = `filter${filter.label === activeFilter ? " active" : ""}`;
         filterEl.textContent = filter.label;
+        filterEl.dataset.filter = filter.label;
+        filterEl.setAttribute("role", "button");
+        filterEl.setAttribute("tabindex", "0");
+        filterEl.addEventListener("click", () => {
+          setActiveFilter(filter.label);
+        });
+        filterEl.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setActiveFilter(filter.label);
+          }
+        });
         siteFilters.appendChild(filterEl);
       });
 
@@ -400,6 +440,11 @@
 
     function renderApps(apps) {
       appsGrid.innerHTML = "";
+
+      if (!apps.length) {
+        renderStatus(`No apps found for ${activeFilter}.`);
+        return;
+      }
 
       apps.forEach((app) => {
         const article = document.createElement("article");
@@ -454,8 +499,9 @@
           appsResponse.json()
         ]);
 
+        allApps = apps;
         renderSite(site);
-        renderApps(apps);
+        renderApps(getFilteredApps());
       } catch (error) {
         renderStatus(
           "Could not load site.json or apps.json. If this page is opened directly from file://, use a small local web server so the JSON files can be loaded."
