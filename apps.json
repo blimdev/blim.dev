@@ -1,0 +1,62 @@
+[
+  {
+    "title": "pawplan",
+    "description": "Plan walks, meals & vet visits for your favorite furball.",
+    "year": "2025",
+    "theme": "teal",
+    "icon": "&#128062;",
+    "tags": ["Pets", "Family"],
+    "badge": "react",
+    "url": "#"
+  },
+  {
+    "title": "versegame",
+    "description": "A daily word puzzle made for the whole family.",
+    "year": "2025",
+    "theme": "yellow",
+    "icon": "&#10022;",
+    "tags": ["Games", "Family"],
+    "badge": "svelte",
+    "url": "#"
+  },
+  {
+    "title": "Storytime Spinner",
+    "description": "Spin three wheels and read a brand-new bedtime story.",
+    "year": "2024",
+    "theme": "purple",
+    "icon": "&#128214;",
+    "tags": ["Creative", "Family"],
+    "badge": "react",
+    "url": "#"
+  },
+  {
+    "title": "Family Plates",
+    "description": "Weekly meal planner with kid-pickable dinner slots.",
+    "year": "2024",
+    "theme": "red",
+    "icon": "&#127869;&#65039;",
+    "tags": ["Family", "Tools"],
+    "badge": "astro",
+    "url": "#"
+  },
+  {
+    "title": "Bedtime Owl",
+    "description": "Wind-down routines that make sleep feel cozy.",
+    "year": "2023",
+    "theme": "blue",
+    "icon": "&#127769;",
+    "tags": ["Family", "Tools"],
+    "badge": "pwa",
+    "url": "#"
+  },
+  {
+    "title": "Chore Champs",
+    "description": "Turn chores into quests with stars and high-fives.",
+    "year": "2025",
+    "theme": "green",
+    "icon": "&#9733;",
+    "tags": ["Family", "Games"],
+    "badge": "remix",
+    "url": "#"
+  }
+]
