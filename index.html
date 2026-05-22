@@ -368,6 +368,16 @@
       appsGrid.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
     }
 
+    function getFilterLabelsFromApps(apps) {
+      const uniqueTags = new Set();
+
+      apps.forEach((app) => {
+        (app.tags || []).forEach((tag) => uniqueTags.add(tag));
+      });
+
+      return ["All", ...Array.from(uniqueTags).sort((a, b) => a.localeCompare(b))];
+    }
+
     function getFilteredApps() {
       if (activeFilter === "All") {
         return allApps;
@@ -389,7 +399,7 @@
       renderApps(getFilteredApps());
     }
 
-    function renderSite(site) {
+    function renderSite(site, apps) {
       document.title = `More Apps by ${site.name}`;
       siteLogo.innerHTML = site.logo;
       siteEyebrow.textContent = site.eyebrow;
@@ -398,7 +408,14 @@
       footerCopy.innerHTML = site.footerCopy;
 
       siteStats.innerHTML = "";
-      (site.stats || []).forEach((stat) => {
+      const derivedStats = [
+        { value: String(apps.length), label: "apps" },
+        ...(site.stats || []).filter((stat) => {
+          return stat.label.toLowerCase() !== "apps" && stat.label.toLowerCase() !== "years";
+        })
+      ];
+
+      derivedStats.forEach((stat) => {
         const statEl = document.createElement("div");
         statEl.className = "stat";
         statEl.innerHTML = `
@@ -409,24 +426,23 @@
       });
 
       siteFilters.innerHTML = "";
-      const initialActiveFilter =
-        (site.filters || []).find((filter) => filter.active)?.label || "All";
-      activeFilter = initialActiveFilter;
+      const filters = getFilterLabelsFromApps(apps);
+      activeFilter = "All";
 
-      (site.filters || []).forEach((filter) => {
+      filters.forEach((filter) => {
         const filterEl = document.createElement("span");
-        filterEl.className = `filter${filter.label === activeFilter ? " active" : ""}`;
-        filterEl.textContent = filter.label;
-        filterEl.dataset.filter = filter.label;
+        filterEl.className = `filter${filter === activeFilter ? " active" : ""}`;
+        filterEl.textContent = filter;
+        filterEl.dataset.filter = filter;
         filterEl.setAttribute("role", "button");
         filterEl.setAttribute("tabindex", "0");
         filterEl.addEventListener("click", () => {
-          setActiveFilter(filter.label);
+          setActiveFilter(filter);
         });
         filterEl.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            setActiveFilter(filter.label);
+            setActiveFilter(filter);
           }
         });
         siteFilters.appendChild(filterEl);
@@ -510,7 +526,7 @@
         ]);
 
         allApps = apps;
-        renderSite(site);
+        renderSite(site, apps);
         renderApps(getFilteredApps());
       } catch (error) {
         renderStatus(
