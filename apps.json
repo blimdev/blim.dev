@@ -1,68 +1,68 @@
 [
   {
-    "title": "pawplan",
-    "description": "Plan walks, meals & vet visits for your favorite furball.",
+    "title": "AC Flowers",
+    "description": "ACNH inspired flower breeding game.",
+    "year": "2026",
+    "theme": "green",
+    "image": "",
+    "icon": "&#9733;",
+    "tags": ["Family", "Games"],
+    "badge": "WIP",
+    "url": "http://ac-flowers.vercel.app/"
+  },
+  {
+    "title": "PawPlan",
+    "description": "Your pet's schedule,organized.",
     "year": "2025",
     "theme": "teal",
     "image": "",
     "icon": "&#128062;",
     "tags": ["Pets", "Family"],
     "badge": "react",
-    "url": "#"
+    "url": "https://pawplan-app.vercel.app/"
   },
   {
-    "title": "versegame",
-    "description": "A daily word puzzle made for the whole family.",
+    "title": "Bible Verse Game",
+    "description": "Memorise the verse, recite it to score stars!",
     "year": "2025",
     "theme": "yellow",
     "image": "",
     "icon": "&#10022;",
     "tags": ["Games", "Family"],
-    "badge": "svelte",
-    "url": "#"
+    "badge": "react",
+    "url": "https://versegame.stead.homes/"
   },
   {
-    "title": "Storytime Spinner",
-    "description": "Spin three wheels and read a brand-new bedtime story.",
+    "title": "Chore Chart",
+    "description": "Customizeable chore chart for kids.",
     "year": "2024",
     "theme": "purple",
     "image": "",
     "icon": "&#128214;",
-    "tags": ["Creative", "Family"],
+    "tags": ["Tools", "Family"],
     "badge": "react",
-    "url": "#"
+    "url": "https://chorechart-blim.vercel.app/"
   },
   {
-    "title": "Family Plates",
-    "description": "Weekly meal planner with kid-pickable dinner slots.",
+    "title": "Tic Tac Toe",
+    "description": "Classic game, played against a friend or CPU",
     "year": "2024",
     "theme": "red",
     "image": "",
     "icon": "&#127869;&#65039;",
-    "tags": ["Family", "Tools"],
-    "badge": "astro",
-    "url": "#"
+    "tags": ["Family", "Games"],
+    "badge": "react",
+    "url": "https://tictactoe-blim.vercel.app/"
   },
   {
-    "title": "Bedtime Owl",
-    "description": "Wind-down routines that make sleep feel cozy.",
-    "year": "2023",
+    "title": "Stead.Home",
+    "description": "All your pet enclosures, managed.",
+    "year": "2026",
     "theme": "blue",
     "image": "",
     "icon": "&#127769;",
     "tags": ["Family", "Tools"],
-    "badge": "pwa",
-    "url": "#"
-  },
-  {
-    "title": "Chore Champs",
-    "description": "Turn chores into quests with stars and high-fives.",
-    "year": "2025",
-    "theme": "green",
-    "image": "",
-    "icon": "&#9733;",
-    "tags": ["Family", "Games"],
-    "badge": "remix",
-    "url": "#"
+    "badge": "react,pwa",
+    "url": "https://stead.homes/"
   }
 ]
