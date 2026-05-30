@@ -1,5 +1,16 @@
 [
   {
+    "title": "Shrimp Sim",
+    "description": "Shrimp Breeding Simulator with real-ish genetics.",
+    "year": "WIP",
+    "theme": "green",
+    "image": "",
+    "icon": "&#9733;",
+    "tags": ["Games"],
+    "badge": "javescript",
+    "url": "http://shrimpsim.blim.dev/"
+  },
+  {
     "title": "AC Flowers",
     "description": "ACNH inspired flower breeding game.",
     "year": "WIP",
@@ -8,7 +19,7 @@
     "icon": "&#9733;",
     "tags": ["Games"],
     "badge": "vite",
-    "url": "http://ac-flowers.vercel.app/"
+    "url": "http://ac-flowers.blim.dev/"
   },
   {
     "title": "PawPlan",
@@ -19,7 +30,7 @@
     "icon": "&#128062;",
     "tags": ["Pets", "Tools"],
     "badge": "react",
-    "url": "https://pawplan-app.vercel.app/"
+    "url": "https://pawplan.blim.dev/"
   },
   {
     "title": "Bible Verse Game",
@@ -30,7 +41,7 @@
     "icon": "&#10022;",
     "tags": ["Games", "Kids"],
     "badge": "react",
-    "url": "https://versegame.stead.homes/"
+    "url": "https://versegame.blim.dev/"
   },
   {
     "title": "Chore Chart",
@@ -41,7 +52,7 @@
     "icon": "&#128214;",
     "tags": ["Tools", "Kids"],
     "badge": "react",
-    "url": "https://chorechart-blim.vercel.app/"
+    "url": "https://chorechart.blim.dev/"
   },
   {
     "title": "Tic Tac Toe",
@@ -52,7 +63,7 @@
     "icon": "&#127869;&#65039;",
     "tags": ["Kids", "Games"],
     "badge": "react",
-    "url": "https://tictactoe-blim.vercel.app/"
+    "url": "https://tictactoe.blim.dev/"
   },
   {
     "title": "Stead.Home",
