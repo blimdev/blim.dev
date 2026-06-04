@@ -189,11 +189,19 @@
       overflow: hidden;
     }
 
+    .thumb.has-image {
+      align-items: stretch;
+      justify-content: stretch;
+      background: #fffdf8;
+    }
+
     .thumb-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
+      filter: none;
+      image-rendering: auto;
     }
 
     .thumb.teal { background: var(--teal); }
@@ -207,6 +215,7 @@
       position: absolute;
       top: 8px;
       right: 8px;
+      z-index: 1;
       border: 2px solid var(--line);
       background: #fff;
       border-radius: 999px;
@@ -481,7 +490,7 @@
           : app.icon;
 
         article.innerHTML = `
-          <div class="thumb ${escapeHtml(app.theme)}">
+          <div class="thumb ${escapeHtml(app.theme)}${app.image ? " has-image" : ""}">
             <span class="year">${escapeHtml(app.year)}</span>
             ${thumbContent}
           </div>
