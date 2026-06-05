@@ -149,6 +149,160 @@
       color: #f6d766;
     }
 
+    .app-sections {
+      display: grid;
+      gap: 24px;
+    }
+
+    .app-section {
+      min-width: 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 14px;
+      margin: 0 0 10px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Baloo 2", cursive;
+      font-size: 2rem;
+      line-height: 0.95;
+    }
+
+    .section-count {
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--pill);
+      padding: 4px 10px 3px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .phone-rail {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      padding: 0 2px 10px;
+      scrollbar-width: thin;
+    }
+
+    .phone-slider {
+      display: grid;
+      gap: 8px;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      min-height: 24px;
+    }
+
+    .slider-dot {
+      width: 22px;
+      height: 22px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .slider-dot::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--pill);
+      box-shadow: 0 1.5px 0 var(--line);
+      transition: width 160ms ease, background 160ms ease;
+    }
+
+    .slider-dot.active {
+      width: 34px;
+      background: transparent;
+    }
+
+    .slider-dot.active::after {
+      width: 24px;
+      background: #2c2c2c;
+    }
+
+    .phone-card {
+      width: min(76vw, 260px);
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+    }
+
+    .phone-thumb {
+      position: relative;
+      height: 360px;
+      border: 3px solid var(--line);
+      border-radius: 34px;
+      background: #202020;
+      padding: 16px 10px 18px;
+      box-shadow: inset 0 0 0 2px #050505;
+      overflow: hidden;
+    }
+
+    .phone-thumb::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      z-index: 2;
+      width: 64px;
+      height: 8px;
+      border-radius: 999px;
+      background: #050505;
+      transform: translateX(-50%);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border: 2px solid #050505;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      overflow: hidden;
+    }
+
+    .phone-screen.has-image {
+      background: #fffdf8;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    .phone-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+      display: block;
+    }
+
+    .phone-screen.teal { background: var(--teal); }
+    .phone-screen.yellow { background: var(--yellow); }
+    .phone-screen.purple { background: var(--purple); }
+    .phone-screen.red { background: var(--red); }
+    .phone-screen.blue { background: var(--blue); }
+    .phone-screen.green { background: var(--green); }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -171,6 +325,8 @@
       border-radius: 20px;
       box-shadow: 0 4px 0 var(--line);
       padding: 10px;
+      display: flex;
+      flex-direction: column;
     }
 
     .card.is-link {
@@ -227,6 +383,9 @@
 
     .content {
       padding: 10px 2px 4px;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
     }
 
     .title {
@@ -248,6 +407,7 @@
       justify-content: space-between;
       gap: 8px;
       align-items: center;
+      margin-top: auto;
     }
 
     .tags {
@@ -270,6 +430,14 @@
 
     .tag {
       background: #f3e9b7;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-left: auto;
     }
 
     .badge {
@@ -341,7 +509,7 @@
 
     <nav class="filters" id="site-filters" aria-label="Categories"></nav>
 
-    <section class="grid" id="apps-grid">
+    <section class="app-sections" id="apps-sections">
       <div class="grid-status">Loading apps...</div>
     </section>
 
@@ -358,7 +526,7 @@
     const siteTagline = document.getElementById("site-tagline");
     const siteStats = document.getElementById("site-stats");
     const siteFilters = document.getElementById("site-filters");
-    const appsGrid = document.getElementById("apps-grid");
+    const appsSections = document.getElementById("apps-sections");
     const footerCopy = document.getElementById("footer-copy");
     const footerLinks = document.getElementById("footer-links");
     let allApps = [];
@@ -374,7 +542,7 @@
     }
 
     function renderStatus(message) {
-      appsGrid.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
+      appsSections.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
     }
 
     function getFilterLabelsFromApps(apps) {
@@ -470,48 +638,188 @@
       });
     }
 
+    function getDisplay(app) {
+      return String(app.display || app.type || "desktop").toLowerCase() === "phone"
+        ? "phone"
+        : "desktop";
+    }
+
+    function getBadges(app) {
+      const badges = Array.isArray(app.badge) ? app.badge : String(app.badge || "").split(",");
+      return badges.map((badge) => badge.trim()).filter(Boolean);
+    }
+
+    function renderBadgePills(app) {
+      return getBadges(app)
+        .map((badge) => `<span class="badge">${escapeHtml(badge)}</span>`)
+        .join("");
+    }
+
+    function makeCardClickable(article, app) {
+      if (!app.url) {
+        return;
+      }
+
+      article.classList.add("is-link");
+      article.addEventListener("click", () => {
+        window.location.href = app.url;
+      });
+    }
+
+    function renderPhoneCard(app) {
+      const article = document.createElement("article");
+      article.className = "card phone-card";
+      makeCardClickable(article, app);
+
+      const tags = (app.tags || [])
+        .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
+        .join("");
+      const screenContent = app.image
+        ? `<img class="phone-image" src="${escapeHtml(app.image)}" alt="${escapeHtml(app.title)} screenshot">`
+        : app.icon;
+
+      article.innerHTML = `
+        <div class="phone-thumb">
+          <span class="year">${escapeHtml(app.year)}</span>
+          <div class="phone-screen ${escapeHtml(app.theme)}${app.image ? " has-image" : ""}">
+            ${screenContent}
+          </div>
+        </div>
+        <div class="content">
+          <h2 class="title">${escapeHtml(app.title)}</h2>
+          <p class="desc">${escapeHtml(app.description)}</p>
+          <div class="meta">
+            <div class="tags">${tags}</div>
+            <div class="badges">${renderBadgePills(app)}</div>
+          </div>
+        </div>
+      `;
+
+      return article;
+    }
+
+    function renderDesktopCard(app) {
+      const article = document.createElement("article");
+      article.className = "card";
+      makeCardClickable(article, app);
+
+      const tags = (app.tags || [])
+        .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
+        .join("");
+      const thumbContent = app.image
+        ? `<img class="thumb-image" src="${escapeHtml(app.image)}" alt="${escapeHtml(app.title)} screenshot">`
+        : app.icon;
+
+      article.innerHTML = `
+        <div class="thumb ${escapeHtml(app.theme)}${app.image ? " has-image" : ""}">
+          <span class="year">${escapeHtml(app.year)}</span>
+          ${thumbContent}
+        </div>
+        <div class="content">
+          <h2 class="title">${escapeHtml(app.title)}</h2>
+          <p class="desc">${escapeHtml(app.description)}</p>
+          <div class="meta">
+            <div class="tags">${tags}</div>
+            <div class="badges">${renderBadgePills(app)}</div>
+          </div>
+        </div>
+      `;
+
+      return article;
+    }
+
+    function renderSection(title, apps, layout) {
+      const section = document.createElement("section");
+      section.className = "app-section";
+      section.innerHTML = `
+        <div class="section-header">
+          <h2 class="section-title">${escapeHtml(title)}</h2>
+          <span class="section-count">${apps.length} ${apps.length === 1 ? "item" : "items"}</span>
+        </div>
+      `;
+
+      const list = document.createElement("div");
+      list.className = layout === "phone" ? "phone-rail" : "grid";
+      apps.forEach((app) => {
+        list.appendChild(layout === "phone" ? renderPhoneCard(app) : renderDesktopCard(app));
+      });
+
+      if (layout === "phone") {
+        const slider = document.createElement("div");
+        slider.className = "phone-slider";
+
+        const dots = document.createElement("div");
+        dots.className = "slider-dots";
+        dots.setAttribute("aria-label", `${title} slides`);
+
+        const dotButtons = apps.map((app, index) => {
+          const dot = document.createElement("button");
+          dot.className = `slider-dot${index === 0 ? " active" : ""}`;
+          dot.type = "button";
+          dot.setAttribute("aria-current", index === 0 ? "true" : "false");
+          dot.setAttribute("aria-label", `Show ${app.title}`);
+          dot.addEventListener("click", (event) => {
+            event.stopPropagation();
+            list.scrollTo({
+              left: list.children[index].offsetLeft - list.offsetLeft,
+              behavior: "smooth",
+            });
+          });
+          dots.appendChild(dot);
+          return dot;
+        });
+
+        const updateDots = () => {
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+
+          Array.from(list.children).forEach((card, index) => {
+            const distance = Math.abs(card.offsetLeft - list.offsetLeft - list.scrollLeft);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          });
+
+          dotButtons.forEach((dot, index) => {
+            dot.classList.toggle("active", index === closestIndex);
+            dot.setAttribute("aria-current", index === closestIndex ? "true" : "false");
+          });
+        };
+
+        list.addEventListener("scroll", () => {
+          window.requestAnimationFrame(updateDots);
+        });
+        window.addEventListener("resize", updateDots);
+
+        slider.appendChild(list);
+        slider.appendChild(dots);
+        section.appendChild(slider);
+      } else {
+        section.appendChild(list);
+      }
+
+      return section;
+    }
+
     function renderApps(apps) {
-      appsGrid.innerHTML = "";
+      appsSections.innerHTML = "";
 
       if (!apps.length) {
         renderStatus(`No apps found for ${activeFilter}.`);
         return;
       }
 
-      apps.forEach((app) => {
-        const article = document.createElement("article");
-        article.className = "card" + (app.url ? " is-link" : "");
+      const phoneApps = apps.filter((app) => getDisplay(app) === "phone");
+      const desktopApps = apps.filter((app) => getDisplay(app) === "desktop");
 
-        const tags = (app.tags || [])
-          .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
-          .join("");
-        const thumbContent = app.image
-          ? `<img class="thumb-image" src="${escapeHtml(app.image)}" alt="${escapeHtml(app.title)} screenshot">`
-          : app.icon;
+      if (phoneApps.length) {
+        appsSections.appendChild(renderSection("Mobile Friendly", phoneApps, "phone"));
+      }
 
-        article.innerHTML = `
-          <div class="thumb ${escapeHtml(app.theme)}${app.image ? " has-image" : ""}">
-            <span class="year">${escapeHtml(app.year)}</span>
-            ${thumbContent}
-          </div>
-          <div class="content">
-            <h2 class="title">${escapeHtml(app.title)}</h2>
-            <p class="desc">${escapeHtml(app.description)}</p>
-            <div class="meta">
-              <div class="tags">${tags}</div>
-              <span class="badge">${escapeHtml(app.badge)}</span>
-            </div>
-          </div>
-        `;
-
-        if (app.url) {
-          article.addEventListener("click", () => {
-            window.location.href = app.url;
-          });
-        }
-
-        appsGrid.appendChild(article);
-      });
+      if (desktopApps.length) {
+        appsSections.appendChild(renderSection("Desktop Sites", desktopApps, "desktop"));
+      }
     }
 
     async function loadData() {
