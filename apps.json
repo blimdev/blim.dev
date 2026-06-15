@@ -94,5 +94,41 @@
     "tags": ["Tools"],
     "badge": "ai, jobs",
     "url": "https://jobs-ai.blim.dev/"
+  },
+  {
+    "title": "Brisbane Bins",
+    "description": "Brisbane bin collection schedule and reminders.",
+    "year": "2026",
+    "theme": "green",
+    "display": "phone",
+    "image": "./previews/bccbinspreview.png",
+    "icon": "&#128465;&#65039;",
+    "tags": ["Tools"],
+    "badge": "javascript",
+    "url": "https://bcc-bins.vercel.app/"
+  },
+  {
+    "title": "Slushie Dash",
+    "description": "Fill slushie cups to the line without spilling.",
+    "year": "2026",
+    "theme": "blue",
+    "display": "desktop",
+    "image": "./previews/slushiedashpreview.png",
+    "icon": "&#129380;",
+    "tags": ["Games", "Kids"],
+    "badge": "react, phaser",
+    "url": "https://slushiedash.vercel.app/"
+  },
+  {
+    "title": "CityDog Spotter",
+    "description": "Live tracker for Brisbane's Bluey & Bingo CityCat ferries.",
+    "year": "2026",
+    "theme": "blue",
+    "display": "phone",
+    "image": "./previews/citydogpreview.png",
+    "icon": "&#9972;&#65039;",
+    "tags": ["Tools"],
+    "badge": "vite",
+    "url": "https://citydog-finder.vercel.app/"
   }
 ]
