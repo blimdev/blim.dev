@@ -130,5 +130,17 @@
     "tags": ["Tools"],
     "badge": "vite",
     "url": "https://citydog-finder.vercel.app/"
+  },
+  {
+    "title": "Alaska",
+    "description": "PWA mobile game.",
+    "year": "2026",
+    "theme": "blue",
+    "display": "phone",
+    "image": "./previews/alaskapreview.png",
+    "icon": "&#127918;",
+    "tags": ["Games"],
+    "badge": "react",
+    "url": "https://alaska.blim.dev/"
   }
 ]
