@@ -538,6 +538,27 @@
     const footerLinks = document.getElementById("footer-links");
     let allApps = [];
     let activeFilter = "All";
+    let showWip = false;
+    let dotClickCount = 0;
+    let dotClickTimer = null;
+
+    function toggleWip() {
+      showWip = !showWip;
+      renderApps(getFilteredApps());
+    }
+
+    function handleDotClick() {
+      dotClickCount += 1;
+      clearTimeout(dotClickTimer);
+      dotClickTimer = setTimeout(() => {
+        dotClickCount = 0;
+      }, 600);
+
+      if (dotClickCount === 3) {
+        dotClickCount = 0;
+        toggleWip();
+      }
+    }
 
     function escapeHtml(value) {
       return String(value)
@@ -552,6 +573,8 @@
       appsSections.innerHTML = `<div class="grid-status">${escapeHtml(message)}</div>`;
     }
 
+    const FILTER_PRIORITY = ["Tools", "Games"];
+
     function getFilterLabelsFromApps(apps) {
       const uniqueTags = new Set();
 
@@ -559,15 +582,25 @@
         (app.tags || []).forEach((tag) => uniqueTags.add(tag));
       });
 
-      return ["All", ...Array.from(uniqueTags).sort((a, b) => a.localeCompare(b))];
+      const remainingTags = Array.from(uniqueTags)
+        .filter((tag) => !FILTER_PRIORITY.includes(tag))
+        .sort((a, b) => a.localeCompare(b));
+
+      const orderedTags = [
+        ...FILTER_PRIORITY.filter((tag) => uniqueTags.has(tag)),
+        ...remainingTags
+      ];
+
+      return ["All", ...orderedTags];
     }
 
     function getFilteredApps() {
-      if (activeFilter === "All") {
-        return allApps;
-      }
+      const apps =
+        activeFilter === "All"
+          ? allApps
+          : allApps.filter((app) => (app.tags || []).includes(activeFilter));
 
-      return allApps.filter((app) => (app.tags || []).includes(activeFilter));
+      return showWip ? apps : apps.filter((app) => app.year !== "WIP");
     }
 
     function setActiveFilter(nextFilter) {
@@ -587,7 +620,24 @@
       document.title = `More Apps by ${site.name}`;
       siteLogo.innerHTML = site.logo;
       siteEyebrow.textContent = site.eyebrow;
-      siteName.textContent = site.name;
+
+      const dotIndex = site.name.lastIndexOf(".");
+      if (dotIndex === -1) {
+        siteName.textContent = site.name;
+      } else {
+        siteName.innerHTML = "";
+        siteName.appendChild(
+          document.createTextNode(site.name.slice(0, dotIndex))
+        );
+        const dotEl = document.createElement("span");
+        dotEl.textContent = ".";
+        dotEl.style.cursor = "pointer";
+        dotEl.addEventListener("click", handleDotClick);
+        siteName.appendChild(dotEl);
+        siteName.appendChild(
+          document.createTextNode(site.name.slice(dotIndex + 1))
+        );
+      }
       siteTagline.textContent = site.tagline;
       footerCopy.innerHTML = site.footerCopy;
 
@@ -611,7 +661,7 @@
 
       siteFilters.innerHTML = "";
       const filters = getFilterLabelsFromApps(apps);
-      activeFilter = "All";
+      activeFilter = filters.includes("Tools") ? "Tools" : "All";
 
       filters.forEach((filter) => {
         const filterEl = document.createElement("span");
@@ -849,8 +899,8 @@
           appsResponse.json()
         ]);
 
-        allApps = apps;
-        renderSite(site, apps);
+        allApps = [...apps].reverse();
+        renderSite(site, allApps);
         renderApps(getFilteredApps());
       } catch (error) {
         renderStatus(
