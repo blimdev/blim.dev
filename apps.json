@@ -2,37 +2,37 @@
   {
     "title": "Shrimp Sim",
     "description": "Shrimp Breeding Simulator with real-ish genetics.",
-    "year": "WIP",
+    "wip": true,
     "theme": "green",
     "display": "phone",
     "image": "./previews/shrimpsimpreview.png",
-    "icon": "&#9733;",
+    "icon": "★",
     "tags": ["Games"],
-    "badge": "javescript",
-    "url": "http://shrimpsim.blim.dev/"
+    "badges": ["javascript"],
+    "url": "https://shrimpsim.blim.dev/"
   },
   {
     "title": "AC Flowers",
     "description": "ACNH inspired flower breeding game.",
-    "year": "WIP",
+    "wip": true,
     "theme": "green",
     "display": "phone",
     "image": "./previews/acflowerspreview.png",
-    "icon": "&#9733;",
+    "icon": "★",
     "tags": ["Games"],
-    "badge": "vite",
-    "url": "http://ac-flowers.blim.dev/"
+    "badges": ["vite"],
+    "url": "https://ac-flowers.blim.dev/"
   },
   {
     "title": "PawPlan",
-    "description": "Your pet's schedule,organized.",
-    "year": "WIP",
+    "description": "Your pet's schedule, organized.",
+    "wip": true,
     "theme": "teal",
     "display": "phone",
     "image": "./previews/pawplanpreview.png",
-    "icon": "&#128062;",
+    "icon": "🐾",
     "tags": ["Pets", "Tools"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://pawplan.blim.dev/"
   },
   {
@@ -42,9 +42,9 @@
     "theme": "yellow",
     "display": "phone",
     "image": "./previews/versegamepreview.png",
-    "icon": "&#10022;",
+    "icon": "✦",
     "tags": ["Games", "Kids"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://versegame.blim.dev/"
   },
   {
@@ -54,9 +54,9 @@
     "theme": "purple",
     "display": "phone",
     "image": "./previews/chorechartpreview.png",
-    "icon": "&#128214;",
+    "icon": "📖",
     "tags": ["Tools", "Kids"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://chorechart.blim.dev/"
   },
   {
@@ -66,9 +66,9 @@
     "theme": "red",
     "display": "phone",
     "image": "./previews/tictactoepreview.png",
-    "icon": "&#127869;&#65039;",
+    "icon": "🍽️",
     "tags": ["Kids", "Games"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://tictactoe.blim.dev/"
   },
   {
@@ -78,9 +78,9 @@
     "theme": "blue",
     "display": "phone",
     "image": "./previews/steadhomepreview.png",
-    "icon": "&#127769;",
+    "icon": "🌙",
     "tags": ["Pets", "Tools"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://stead.homes/"
   },
   {
@@ -90,9 +90,9 @@
     "theme": "blue",
     "display": "desktop",
     "image": "./previews/jobs-aipreview.png",
-    "icon": "&#128188;",
+    "icon": "💼",
     "tags": ["Tools"],
-    "badge": "ai, jobs",
+    "badges": ["ai", "jobs"],
     "url": "https://forge.blim.dev/"
   },
   {
@@ -102,21 +102,21 @@
     "theme": "green",
     "display": "phone",
     "image": "./previews/bccbinspreview.png",
-    "icon": "&#128465;&#65039;",
+    "icon": "🗑️",
     "tags": ["Tools"],
-    "badge": "javascript",
+    "badges": ["javascript"],
     "url": "https://bcc-bins.vercel.app/"
   },
   {
     "title": "Slushie Dash",
     "description": "Fill slushie cups to the line without spilling.",
-    "year": "WIP",
+    "wip": true,
     "theme": "blue",
     "display": "desktop",
     "image": "./previews/slushiedashpreview.png",
-    "icon": "&#129380;",
+    "icon": "🥤",
     "tags": ["Games", "Kids"],
-    "badge": "react, phaser",
+    "badges": ["react", "phaser"],
     "url": "https://slushiedash.vercel.app/"
   },
   {
@@ -126,9 +126,9 @@
     "theme": "blue",
     "display": "phone",
     "image": "./previews/citydogpreview.png",
-    "icon": "&#9972;&#65039;",
+    "icon": "⛴️",
     "tags": ["Tools"],
-    "badge": "vite",
+    "badges": ["vite"],
     "url": "https://citydog-spotter.blim.dev/"
   },
   {
@@ -138,9 +138,9 @@
     "theme": "blue",
     "display": "phone",
     "image": "./previews/alaskapreview.png",
-    "icon": "&#127918;",
+    "icon": "🎮",
     "tags": ["Games"],
-    "badge": "react",
+    "badges": ["react"],
     "url": "https://alaska.blim.dev/"
   }
 ]
