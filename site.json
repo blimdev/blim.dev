@@ -1,24 +1,9 @@
 {
   "name": "blim.dev",
   "eyebrow": "More apps by",
-  "logo": "&#128102;&#127995;",
+  "logo": "👦🏻",
   "tagline": "A little library of apps for curious kids, tired parents, and everyone in between.",
-  "stats": [
-    { "value": "10", "label": "apps" },
-    { "value": "4", "label": "years" },
-    { "value": "&infin;", "label": "ideas" }
-  ],
-  "filters": [
-    { "label": "All", "active": false },
-    { "label": "Games", "active": false },
-    { "label": "Learning", "active": false },
-    { "label": "Family", "active": true },
-    { "label": "Creative", "active": false },
-    { "label": "Tools", "active": false },
-    { "label": "Home", "active": false },
-    { "label": "Pets", "active": false }
-  ],
-  "footerCopy": "&copy; blim.dev &middot; made with crayons &amp; code",
+  "footerCopy": "© blim.dev · made with crayons & code",
   "footerLinks": [
     { "label": "github", "href": "https://github.com/blimdev/" },
     { "label": "email", "href": "mailto:blimdev90@gmail.com" }
